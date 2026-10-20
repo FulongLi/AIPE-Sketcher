@@ -21,6 +21,14 @@ schematic and proves that the drawing is electrically faithful to it.
 It runs locally on Python 3.9+ with the standard library only. No API key,
 cloud service or package installation is needed for the plugin.
 
+## Watch Quick Start Tutorial
+
+<a href="https://github.com/FulongLi/AIPE-Sketcher/releases/download/v0.2.0/AIPE-Sketcher-Quick-Start.mp4"><img src="docs/media/quick-start-v2-thumbnail.png" alt="AIPE Sketcher Quick Start video: install it, describe a circuit, get a schematic" width="560"></a>
+
+99 seconds: install AIPE Sketcher in Codex or Claude Code, describe a circuit
+in plain English, and get a validated SVG schematic.
+[Watch the video](https://github.com/FulongLi/AIPE-Sketcher/releases/download/v0.2.0/AIPE-Sketcher-Quick-Start.mp4) · [storyboard and sources](docs/media/README.md)
+
 ## Installation
 
 ### OpenAI Codex
@@ -80,6 +88,7 @@ given. It does not establish component ratings, safety or circuit performance.
 | Symbol library and registry | [docs/symbol-library.md](docs/symbol-library.md) |
 | AIPE Engineering State integration | [docs/engineering-state.md](docs/engineering-state.md) |
 | Regression results | [docs/auto-planning-results.md](docs/auto-planning-results.md) |
+| Quick Start tutorial video: storyboard, source and verification | [docs/media/README.md](docs/media/README.md) |
 
 ## License
 

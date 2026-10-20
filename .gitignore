@@ -13,3 +13,6 @@ tests/_out/
 # packaging
 dist/
 *.egg-info/
+
+# tutorial videos: publish as release assets (docs/media/README.md)
+docs/media/*.mp4

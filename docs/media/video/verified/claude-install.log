@@ -1,0 +1,20 @@
+$ claude plugin marketplace add FulongLi/AIPE-Sketcher
+Adding marketplace…SSH not configured, cloning via HTTPS: https://github.com/FulongLi/AIPE-Sketcher.git
+Refreshing marketplace cache (timeout: 120s)…
+Cloning repository (timeout: 120s): https://github.com/FulongLi/AIPE-Sketcher.git
+Clone complete, validating marketplace…
+Cleaning up old marketplace cache…
+✔ Successfully added marketplace: aipe-sketcher (declared in user settings)
+[exit 0]
+$ claude plugin install aipe-sketcher@aipe-sketcher
+Installing plugin "aipe-sketcher@aipe-sketcher"...✔ Successfully installed plugin: aipe-sketcher@aipe-sketcher (scope: user)
+[exit 0]
+$ claude plugin list
+Installed plugins:
+
+  ❯ aipe-sketcher@aipe-sketcher
+    Version: 0.2.0
+    Scope: user
+    Status: ✔ enabled
+
+[exit 0]

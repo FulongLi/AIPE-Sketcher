@@ -11,3 +11,4 @@
 | [symbol-library.md](symbol-library.md) | Master symbol sheet, extraction, registry, provenance and the transformer history |
 | [engineering-state.md](engineering-state.md) | AIPE Core Engineering State mode, provenance sidecar, and stable identifiers |
 | [auto-planning-results.md](auto-planning-results.md) | Automatic versus manual layout scores (`python3 tools/compare_plans.py`) |
+| [media/README.md](media/README.md) | Quick Start tutorial video (V2): storyboard, verified install actions, AIPE video template, YouTube text and [verification report](media/verification.md) |

@@ -1,0 +1,69 @@
+{
+  "circuit": {
+    "components": 23,
+    "name": "Dual Active Bridge",
+    "nets": 16,
+    "sha256": "3e097a59a4529c8e06a9d26b020abc85b336d0d854c08c4dd7bca6a645e47c5e"
+  },
+  "command": "render",
+  "drawing_connectivity": {
+    "faults": [],
+    "status": "passed"
+  },
+  "electrical_validation": {
+    "problems": [],
+    "status": "passed"
+  },
+  "layout": {
+    "acceptable": true,
+    "candidates_evaluated": 12,
+    "checklist_attention": {},
+    "faults": [
+      "net PRI_B: a 1.69 cell run between adjacent components is outside the 0.75-1.5 band",
+      "net SEC_A: a 1.69 cell run between adjacent components is outside the 0.75-1.5 band"
+    ],
+    "forced": false,
+    "notes": [
+      "geometry candidate 3: score 97 -> 97; rerouted, relabelled and connectivity validated"
+    ],
+    "overall_score": 97,
+    "scores": {
+      "alignment": 100,
+      "clearance": 97,
+      "collision": 100,
+      "connectivity": 100,
+      "conventions": 100,
+      "crossings": 94,
+      "labelling": 100,
+      "power_path": 100,
+      "routing": 100,
+      "spacing_uniformity": 76,
+      "symmetry": 100,
+      "topology_readability": 95,
+      "visual_rhythm": 98
+    },
+    "selected_candidate": 3
+  },
+  "limitations": [
+    "Connectivity validation proves the drawing matches the supplied Circuit IR; it does not establish that the circuit is correct, safe or fit for purpose.",
+    "No component ratings, losses, thermal behaviour, control stability or circuit performance are evaluated."
+  ],
+  "outputs": {
+    "report": "schematics/dab.report.json",
+    "svg": "schematics/dab.svg"
+  },
+  "status": "ok",
+  "svg": {
+    "sha256": "e3da9cc61263096bbb43a9d5c187023a7100fef3289fb7d8706f909dd7b3c452",
+    "well_formed": true
+  },
+  "symbol_support": {
+    "problems": [],
+    "status": "passed"
+  },
+  "tool": {
+    "id": "aipe.sketch",
+    "name": "AIPE Sketcher",
+    "version": "0.2.0"
+  }
+}
