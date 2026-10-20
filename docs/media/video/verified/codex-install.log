@@ -1,0 +1,8 @@
+$ codex plugin marketplace add FulongLi/AIPE-Sketcher
+Added marketplace `aipe-sketcher` from https://github.com/FulongLi/AIPE-Sketcher.git.
+Installed marketplace root: ~/.codex/.tmp/marketplaces/aipe-sketcher
+[exit 0]
+$ codex plugin add aipe-sketcher@aipe-sketcher
+Added plugin `aipe-sketcher` from marketplace `aipe-sketcher`.
+Installed plugin root: ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0
+[exit 0]

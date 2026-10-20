@@ -1,0 +1,141 @@
+# codex exec, 2026-10-20, fresh CODEX_HOME, no plugin. Prompt: "Please install AIPE Sketcher from https://github.com/FulongLi/AIPE-Sketcher and make it available in this workspace." Result: the agent did NOT use the plugin system; it cloned the repo and hand-copied the skill.
+# Condensed from the --json event stream: agent messages and shell commands with exit codes; output truncated to 8 lines.
+
+codex: I’ll check the repository’s installation instructions and set it up in this workspace.
+
+$ /bin/zsh -lc "pwd && rg --files -g 'AGENTS.md' -g 'README*' -g 'package.json' -g 'pyproject.toml' -g 'SKILL.md' -g '.git'"    # exit 1
+  <project>
+
+$ /bin/zsh -lc 'git ls-remote https://github.com/FulongLi/AIPE-Sketcher HEAD'    # exit 0
+  a6447c7676bbe1f308ab7b9c1beeb90b0f22dcbc	HEAD
+
+$ /bin/zsh -lc 'git clone https://github.com/FulongLi/AIPE-Sketcher AIPE-Sketcher'    # exit 0
+  Cloning into 'AIPE-Sketcher'...
+
+$ /bin/zsh -lc 'ls -la; rg --files AIPE-Sketcher | head -60'    # exit 0
+  total 0
+  drwxr-xr-x@  3 fulongli  wheel   96 Oct 20 22:51 .
+  drwxr-xr-x@  6 fulongli  wheel  192 Oct 20 22:51 ..
+  drwxr-xr-x@ 21 fulongli  wheel  672 Oct 20 22:51 AIPE-Sketcher
+  AIPE-Sketcher/assets/master/Inkscape_Symbols_All.svg
+  AIPE-Sketcher/assets/symbol_registry.json
+  AIPE-Sketcher/skills/schematic/SKILL.md
+  AIPE-Sketcher/skills/schematic/scripts/aipe_sketcher.py
+  …
+
+$ /bin/zsh -lc 'cat AIPE-Sketcher/README.md AIPE-Sketcher/pyproject.toml AIPE-Sketcher/docs/plugins.md; find .. -name AGENTS.md -print'    # exit 0
+  # AIPE Sketcher
+  
+  AI-powered electrical schematic generation for power electronics and circuit engineering.
+  
+  ## Overview
+  
+  AIPE Sketcher turns a circuit description into a clean, conventional SVG
+  schematic and proves that the drawing is electrically faithful to it.
+  …
+
+$ /bin/zsh -lc 'command -v codex; command -v python3; cat AIPE-Sketcher/skills/schematic/SKILL.md; cat ~/.codex/skills/.system/skill-installer/SKILL.md'    # exit 0
+  /usr/bin/python3
+  ---
+  name: schematic
+  description: Generate connectivity-checked SVG electrical schematics with AIPE Sketcher. Use when the user asks to draw, sketch, generate, render or export a circuit schematic or circuit diagram - power converters (buck, boost, half bridge, full bridge, dual active bridge / DAB, LLC resonant, three-phase inverter) or any custom circuit described as components and connections, a netlist or Circuit IR JSON - or asks to validate a circuit's electrical connections. Converts the request into explicit Circuit IR, runs the bundled AIPE Sketcher Python engine, and reports validation results, assumptions and limitations.
+  ---
+  
+  # AIPE Sketcher: electrical schematic generation
+  
+  …
+
+codex: The repository is cloned. The Codex CLI isn’t installed here, so I’ll make Sketcher available through a workspace skill and local command, then verify that it renders a schematic.
+
+$ /bin/zsh -lc "mkdir -p .agents/skills bin
+ln -s ../../AIPE-Sketcher/skills/schematic .agents/skills/aipe-sketcher
+cat > bin/aipe-sketcher <<'EOF'
+#"'!/bin/sh
+workspace_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec python3 "$workspace_dir/AIPE-Sketcher/skills/schematic/scripts/aipe_sketcher.py" "$@"
+EOF
+chmod +x bin/aipe-sketcher
+./bin/aipe-sketcher --version
+./bin/aipe-sketcher examples buck --ir-only -o .aipe-sketcher-check
+./bin/aipe-sketcher render .aipe-sketcher-check/buck.json -o .aipe-sketcher-check --json'    # exit 0
+  aipe-sketcher 0.2.0
+  buck                           -> <project>/.aipe-sketcher-check/buck.json
+  {
+    "circuit": {
+      "components": 9,
+      "name": "Buck Converter",
+      "nets": 5,
+      "sha256": "df08516226365388d7bb604c9e8be7dcb8341dcc28eefe7383956257c47049fa"
+  …
+
+$ /bin/zsh -lc "python3 .agents/skills/aipe-sketcher/scripts/aipe_sketcher.py --version
+cat > README.md <<'EOF'
+# AIPE Sketcher workspace
+
+AIPE Sketcher 0.2.0 is checked out in "'`AIPE-Sketcher/`.
+
+Run from this workspace:
+
+```sh
+./bin/aipe-sketcher --help
+./bin/aipe-sketcher examples dab --ir-only -o schematics
+./bin/aipe-sketcher render schematics/dab.json -o schematics --json
+```
+
+The workspace skill is linked at `.agents/skills/aipe-sketcher`.
+Start a new agent session in this workspace to load it.
+Python 3.9+ is required; no additional Python dependencies are needed.
+
+Installation was verified by rendering the reference buck converter in
+`.aipe-sketcher-check/`: electrical validation, symbol support and drawing
+connectivity passed, and the layout was acceptable.
+EOF'    # exit 0
+  AIPE Sketcher engine not found next to this skill (<project>/.agents) and not installed (No module named 'aipe_sketch'). Reinstall the plugin, or run: python3 -m pip install "git+https://github.com/FulongLi/AIPE-Sketcher"
+
+$ /bin/zsh -lc 'cat AIPE-Sketcher/skills/schematic/scripts/aipe_sketcher.py AIPE-Sketcher/aipe_sketch/paths.py'    # exit 0
+  #!/usr/bin/env python3
+  """Run the AIPE Sketcher command line from the plugin, with nothing to install.
+  
+  The engine is pure Python standard library and ships in the plugin root
+  (three directories above this file), together with its symbol sheet.  If the
+  plugin copy is missing, an installed ``aipe-sketcher`` package is used.
+  
+      python3 <skill-dir>/scripts/aipe_sketcher.py --help
+  …
+
+$ /bin/zsh -lc "rm .agents/skills/aipe-sketcher
+cp -R AIPE-Sketcher/skills/schematic .agents/skills/aipe-sketcher
+cat > .agents/skills/aipe-sketcher/scripts/aipe_sketcher.py <<'EOF'
+#"'!/usr/bin/env python3
+"""Launch the engine from this workspace'"'s complete repository checkout.\"\"\"
+from pathlib import Path
+import runpy
+
+workspace = Path(__file__).resolve().parents[4]
+runpy.run_path(str(workspace / 'AIPE-Sketcher/skills/schematic/scripts/aipe_sketcher.py'), run_name='__main__')
+EOF
+python3 .agents/skills/aipe-sketcher/scripts/aipe_sketcher.py --version
+python3 .agents/skills/aipe-sketcher/scripts/aipe_sketcher.py validate .aipe-sketcher-check/buck.json --json
+python3 - <<'PY'
+from pathlib import Path
+p = Path('README.md')
+p.write_text(p.read_text().replace('The workspace skill is linked at', 'The workspace skill is installed at'))
+PY"    # exit 0
+  aipe-sketcher 0.2.0
+  {
+    "circuit": {
+      "components": 9,
+      "name": "Buck Converter",
+      "nets": 5,
+      "sha256": "df08516226365388d7bb604c9e8be7dcb8341dcc28eefe7383956257c47049fa"
+    },
+  …
+
+codex: Installed AIPE Sketcher 0.2.0 in this workspace.
+
+- Run it with `./bin/aipe-sketcher --help`.
+- Workspace skill installed at `.agents/skills/aipe-sketcher`; start a new session to load it.
+- Verified a buck converter render: electrical and connectivity checks passed; layout acceptable.
+
+Usage instructions are in `README.md`.
+

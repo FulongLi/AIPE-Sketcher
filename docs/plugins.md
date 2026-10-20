@@ -97,5 +97,7 @@ PCB, CAD, ...):
    MCP), never from the model. Reports state assumptions and limitations.
 5. Registry identifiers (`aipe.<tool>`) are stable across product renames;
    display names may change.
-6. `README.md` follows: one-line description, Overview, Installation (Codex,
-   Claude Code), Quick Start, Documentation, License.
+6. `README.md` follows: one-line description, Overview, Watch Quick Start
+   Tutorial (optional), Installation (Codex, Claude Code), Quick Start,
+   Documentation, License. Tutorial media lives in `docs/media/`; videos are
+   release assets, not Git files.

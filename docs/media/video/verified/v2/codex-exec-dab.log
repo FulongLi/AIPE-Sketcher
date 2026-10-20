@@ -1,0 +1,71 @@
+# codex exec, 2026-10-20, codex-cli 0.163.0-alpha.10.2, plugin installed from GitHub. Prompt: "Using AIPE Sketcher, draw a Dual Active Bridge converter schematic and export it as SVG."
+# Condensed from the --json event stream: agent messages and shell commands with exit codes; output truncated to 8 lines.
+
+codex: I’ll use the AIPE Sketcher schematic skill to draw the Dual Active Bridge converter and export a connectivity-checked SVG.
+
+$ /bin/zsh -lc 'cat ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0/skills/schematic/SKILL.md'    # exit 0
+  ---
+  name: schematic
+  description: Generate connectivity-checked SVG electrical schematics with AIPE Sketcher. Use when the user asks to draw, sketch, generate, render or export a circuit schematic or circuit diagram - power converters (buck, boost, half bridge, full bridge, dual active bridge / DAB, LLC resonant, three-phase inverter) or any custom circuit described as components and connections, a netlist or Circuit IR JSON - or asks to validate a circuit's electrical connections. Converts the request into explicit Circuit IR, runs the bundled AIPE Sketcher Python engine, and reports validation results, assumptions and limitations.
+  ---
+  
+  # AIPE Sketcher: electrical schematic generation
+  
+  Pipeline: **request -> explicit Circuit IR (JSON) -> validate -> render SVG ->
+  …
+
+$ /bin/zsh -lc 'python3 ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0/skills/schematic/scripts/aipe_sketcher.py examples --list'    # exit 0
+  buck                           converter  Buck Converter
+  boost                          converter  Boost Converter
+  half_bridge                    converter  Half Bridge
+  full_bridge                    converter  Full Bridge
+  three_phase_inverter           converter  Three-Phase Two-Level Inverter
+  dab                            converter  Dual Active Bridge
+  llc_resonant                   converter  LLC Resonant Converter
+  series_rlc                     synthetic  Series R-L-C Chain
+  …
+
+$ /bin/zsh -lc 'cat ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0/skills/schematic/references/reference-circuits.md'    # exit 0
+  # Reference circuits
+  
+  `examples NAME --ir-only -o DIR` writes the exact Circuit IR of each circuit
+  below. They are idealised **illustrative** configurations, not designs: no
+  values, ratings or part numbers are included. When you use one, tell the user
+  which configuration it is and list its assumptions from this file.
+  
+  All switches have a `control` gate terminal (`G1`, `G2`, ...). Sources are
+  …
+
+$ /bin/zsh -lc 'python3 ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0/skills/schematic/scripts/aipe_sketcher.py examples dab --ir-only -o schematics'    # exit 0
+  dab                            -> <project>/schematics/dab.json
+
+$ /bin/zsh -lc 'python3 ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0/skills/schematic/scripts/aipe_sketcher.py validate schematics/dab.json --json'    # exit 0
+  {
+    "circuit": {
+      "components": 23,
+      "name": "Dual Active Bridge",
+      "nets": 16,
+      "sha256": "3e097a59a4529c8e06a9d26b020abc85b336d0d854c08c4dd7bca6a645e47c5e"
+    },
+    "command": "validate",
+  …
+
+$ /bin/zsh -lc 'python3 ~/.codex/plugins/cache/aipe-sketcher/aipe-sketcher/0.2.0/skills/schematic/scripts/aipe_sketcher.py render schematics/dab.json -o schematics --json'    # exit 0
+  {
+    "circuit": {
+      "components": 23,
+      "name": "Dual Active Bridge",
+      "nets": 16,
+      "sha256": "3e097a59a4529c8e06a9d26b020abc85b336d0d854c08c4dd7bca6a645e47c5e"
+    },
+    "command": "render",
+  …
+
+codex: Created the [Dual Active Bridge SVG](schematics/dab.svg) using AIPE Sketcher, with [Circuit IR](schematics/dab.json) and [validation report](schematics/dab.report.json).
+
+Electrical validation, symbol support, and drawing connectivity **passed**. Layout is acceptable, scoring **97/100**, with minor spacing warnings on PRI_B and SEC_A.
+
+The reference uses two full bridges, a transformer, separate grounds, ideal voltage source, resistive load, and gate-control terminals. Energy-transfer inductance is assumed inside the transformer; no separate series inductor or component ratings are shown.
+
+Validation confirms the drawing matches the circuit description; it does not verify safety, ratings, or performance.
+

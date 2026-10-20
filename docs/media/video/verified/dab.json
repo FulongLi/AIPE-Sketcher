@@ -1,0 +1,339 @@
+{
+  "components": [
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "cap",
+      "ports": [
+        "a",
+        "b"
+      ],
+      "ref": "C1",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "cap",
+      "ports": [
+        "a",
+        "b"
+      ],
+      "ref": "C2",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G1",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G2",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G3",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G4",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G5",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G6",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G7",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": "control",
+      "kind": "terminal",
+      "ports": [
+        "t"
+      ],
+      "ref": "G8",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "power_ground",
+      "ports": [
+        "t"
+      ],
+      "ref": "GND1",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "power_ground",
+      "ports": [
+        "t"
+      ],
+      "ref": "GND2",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q1",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q2",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q3",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q4",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q5",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q6",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q7",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "nmos",
+      "ports": [
+        "d",
+        "s",
+        "g"
+      ],
+      "ref": "Q8",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "res",
+      "ports": [
+        "a",
+        "b"
+      ],
+      "ref": "R1",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "transformer",
+      "ports": [
+        "p1",
+        "p2",
+        "s1",
+        "s2"
+      ],
+      "ref": "T1",
+      "role": null
+    },
+    {
+      "attrs": {},
+      "interface": null,
+      "kind": "vsource",
+      "ports": [
+        "p",
+        "n"
+      ],
+      "ref": "V1",
+      "role": null
+    }
+  ],
+  "name": "Dual Active Bridge",
+  "nets": {
+    "DCN1": [
+      "C1.b",
+      "GND1.t",
+      "Q2.s",
+      "Q4.s",
+      "V1.n"
+    ],
+    "DCN2": [
+      "C2.b",
+      "GND2.t",
+      "Q6.s",
+      "Q8.s",
+      "R1.b"
+    ],
+    "DCP1": [
+      "C1.a",
+      "Q1.d",
+      "Q3.d",
+      "V1.p"
+    ],
+    "DCP2": [
+      "C2.a",
+      "Q5.d",
+      "Q7.d",
+      "R1.a"
+    ],
+    "G_1": [
+      "G1.t",
+      "Q1.g"
+    ],
+    "G_2": [
+      "G2.t",
+      "Q2.g"
+    ],
+    "G_3": [
+      "G3.t",
+      "Q3.g"
+    ],
+    "G_4": [
+      "G4.t",
+      "Q4.g"
+    ],
+    "G_5": [
+      "G5.t",
+      "Q5.g"
+    ],
+    "G_6": [
+      "G6.t",
+      "Q6.g"
+    ],
+    "G_7": [
+      "G7.t",
+      "Q7.g"
+    ],
+    "G_8": [
+      "G8.t",
+      "Q8.g"
+    ],
+    "PRI_A": [
+      "Q1.s",
+      "Q2.d",
+      "T1.p1"
+    ],
+    "PRI_B": [
+      "Q3.s",
+      "Q4.d",
+      "T1.p2"
+    ],
+    "SEC_A": [
+      "Q5.s",
+      "Q6.d",
+      "T1.s1"
+    ],
+    "SEC_B": [
+      "Q7.s",
+      "Q8.d",
+      "T1.s2"
+    ]
+  },
+  "version": 1
+}
