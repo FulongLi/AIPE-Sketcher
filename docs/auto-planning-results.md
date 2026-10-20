@@ -6,18 +6,18 @@ matches Circuit IR; acceptable also checks collisions and hard drawing rules.
 
 | Circuit | Automatic | Manual baseline | Electrically valid | Acceptable | Selected candidate |
 | --- | ---: | ---: | --- | --- | ---: |
-| buck | 97 | 97 | True | True | 6 |
+| buck | 98 | 98 | True | True | 6 |
 | boost | 99 | 99 | True | True | 6 |
 | half_bridge | 99 | 99 | True | True | 0 |
 | full_bridge | 99 | 99 | True | True | 0 |
-| three_phase_inverter | 97 | 97 | True | True | 3 |
+| three_phase_inverter | 98 | 97 | True | True | 3 |
 | dab | 97 | 97 | True | True | 3 |
 | llc_resonant | 96 | 96 | True | True | 6 |
-| series_rlc | 99 | 99 | True | True | 0 |
+| series_rlc | 99 | 98 | True | True | 1 |
 | twin_shunt_branches | 100 | 93 | True | True | 6 |
-| three_repeated_legs | 97 | 97 | True | True | 3 |
+| three_repeated_legs | 98 | 97 | True | True | 3 |
 | parallel_rc_block | 98 | 98 | True | True | 0 |
-| transformer_between_networks | 100 | 94 | True | True | 0 |
+| transformer_between_networks | 100 | 96 | True | True | 0 |
 | source_l_r | 100 | — | True | True | 0 |
 | isolated_series_chain | 98 | — | True | True | 6 |
 

@@ -9,3 +9,7 @@ out/catalog_*.png
 out/library_report.*
 
 tests/_out/
+
+# packaging
+dist/
+*.egg-info/

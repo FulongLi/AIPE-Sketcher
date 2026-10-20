@@ -1,0 +1,17 @@
+{
+  "name": "aipe-sketcher",
+  "description": "AIPE Sketcher: connectivity-checked electrical schematic generation for Claude Code.",
+  "owner": {
+    "name": "AIPE Labs / Spirit Connect",
+    "url": "https://github.com/FulongLi"
+  },
+  "plugins": [
+    {
+      "name": "aipe-sketcher",
+      "source": "./",
+      "description": "Generate and validate SVG electrical schematics for power electronics and general circuits from explicit Circuit IR.",
+      "category": "engineering",
+      "tags": ["schematic", "power-electronics", "circuit", "svg"]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # Engineering State and schematic artifacts
 
-AIPE-Sketch is a **Tool**: it turns an explicit electrical Circuit IR into a
-schematic artifact. AIPE-Core owns shared Engineering State schemas. Registry owns
+AIPE Sketcher (registry id `aipe.sketch`) is a **Tool**: it turns an explicit
+electrical Circuit IR into a schematic artifact. It runs standalone; this page
+covers the optional AIPE-integrated mode. AIPE-Core owns shared Engineering State schemas. Registry owns
 the `aipe.yaml` discovery contract. The existing planner, symbol library and renderer
 remain the source of truth for schematic generation.
 
@@ -36,7 +37,8 @@ report = render_engineering_state(state, 'out/dab-concept.svg')
 For a saved state carrying that extension:
 
 ```sh
-python -m aipe_sketch.state state.json out/schematic.svg
+aipe-sketcher state state.json out/schematic.svg        # installed CLI or plugin launcher
+python -m aipe_sketch.state state.json out/schematic.svg  # unchanged module entry point
 ```
 
 The adjacent `.provenance.json` records source-state and Circuit IR SHA-256 hashes,
@@ -50,5 +52,20 @@ The renderer checks drawing connectivity. It does **not** establish device ratin
 safe clearances, control stability, losses, efficiency, thermal performance or a
 manufacturable PCB. No simulation or measurement evidence is fabricated. Python
 and the existing SVG implementation form the default local path; Inkscape is an
-optional editor. Repository asset licensing remains `NOASSERTION` pending an
-owner-supplied licence; the manifest does not silently relicense existing symbols.
+optional editor. Licensing: project code is under the AIPE Sketcher personal,
+non-commercial licence ([LICENSE](../LICENSE)); the master symbol sheet keeps its
+upstream CC0 1.0 dedication ([THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)).
+
+## Identifiers after the rename
+
+The product was renamed from AIPE Sketch to AIPE Sketcher in 0.2.0. Every
+machine identifier is unchanged, so existing states, artifacts and registry
+entries need no migration:
+
+| Identifier | Value |
+| --- | --- |
+| Registry id (`aipe.yaml`) | `aipe.sketch` |
+| Engineering State extension | `extensions["aipe.sketch"]` with `circuit_ir` and `evidence_refs` |
+| Provenance `tool.id` / `adapter_version` | `aipe.sketch` / `0.1.0` |
+| Python package | `aipe_sketch` |
+| Plugin and PyPI-style distribution name | `aipe-sketcher` (new) |

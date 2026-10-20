@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aipe-sketcher"
+dynamic = ["version"]
+description = "AI-powered electrical schematic generation for power electronics and circuit engineering."
+readme = "README.md"
+requires-python = ">=3.9"
+# Project code: the AIPE Sketcher personal, non-commercial licence (LICENSE).
+# The bundled master symbol sheet is third-party CC0-1.0 material
+# (THIRD_PARTY_NOTICES.md). Not an OSI-approved open-source licence.
+license = "LicenseRef-AIPE-Sketcher-Personal-NonCommercial-0.1 AND CC0-1.0"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+authors = [{ name = "Fulong Li" }]
+keywords = ["schematic", "power-electronics", "circuit", "svg", "netlist", "aipe"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+    "Private :: Do Not Upload",
+]
+# The engine uses only the Python standard library.
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/FulongLi/AIPE-Sketcher"
+Repository = "https://github.com/FulongLi/AIPE-Sketcher"
+Documentation = "https://github.com/FulongLi/AIPE-Sketcher/tree/main/docs"
+
+[project.scripts]
+aipe-sketcher = "aipe_sketch.cli:main"
+
+[tool.hatch.version]
+path = "aipe_sketch/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aipe_sketch"]
+
+# The renderer needs the master symbol sheet at run time; ship it inside the
+# package so an installed copy works from any directory (see paths.py).
+[tool.hatch.build.targets.wheel.force-include]
+"assets/master/Inkscape_Symbols_All.svg" = "aipe_sketch/_data/Inkscape_Symbols_All.svg"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "aipe_sketch/",
+    "assets/master/",
+    "assets/symbol_registry.json",
+    "tests/",
+    "tools/",
+    "build.py",
+    "aipe.yaml",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+]
