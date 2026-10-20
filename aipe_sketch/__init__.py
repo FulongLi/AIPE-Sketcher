@@ -1,8 +1,10 @@
-"""Circuit IR plus optional schematic backend.
+"""AIPE Sketcher: Circuit IR plus optional schematic backend.
 
 Importing Netlist does not import the SVG, placement or routing backend.
 """
 from importlib import import_module
+
+__version__ = '0.2.0'
 from .netlist import Component, Netlist
 
 _EXPORTS = {

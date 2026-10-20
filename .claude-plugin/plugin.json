@@ -1,0 +1,14 @@
+{
+  "name": "aipe-sketcher",
+  "displayName": "AIPE Sketcher",
+  "version": "0.2.0",
+  "description": "AI-powered electrical schematic generation for power electronics and circuit engineering: turns a circuit description into explicit Circuit IR, renders an SVG schematic with the bundled Python engine and checks that every drawn connection matches the circuit. No API key, cloud service or Python packages required.",
+  "author": {
+    "name": "AIPE Labs / Spirit Connect",
+    "url": "https://github.com/FulongLi"
+  },
+  "homepage": "https://github.com/FulongLi/AIPE-Sketcher",
+  "repository": "https://github.com/FulongLi/AIPE-Sketcher",
+  "license": "LicenseRef-AIPE-Sketcher-Personal-NonCommercial-0.1 AND CC0-1.0",
+  "keywords": ["schematic", "circuit", "power-electronics", "netlist", "svg", "dc-dc", "inverter", "aipe"]
+}

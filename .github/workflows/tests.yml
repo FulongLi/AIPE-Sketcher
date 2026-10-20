@@ -1,13 +1,110 @@
-name: Sketch regression
+name: AIPE Sketcher CI
 on: [push, pull_request]
 permissions:
   contents: read
+
 jobs:
-  test:
+  regression:
+    name: tests (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, python: '3.12'}
+          - {os: macos-latest, python: '3.12'}
+          - {os: windows-latest, python: '3.12'}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      # -X utf8 keeps UTF-8 symbol fixtures consistent across system locales.
+      - run: python -X utf8 -m unittest discover -s tests
+
+  python-floor:
+    # setup-python has no 3.9 build for current runners (3.9 is end-of-life),
+    # but 3.9 is still the oldest supported version (macOS ships it as python3).
+    name: tests (ubuntu-latest, Python 3.9 via uv)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
+      - run: uv python install 3.9
+      - run: uv run --no-project --python 3.9 python -X utf8 -m unittest discover -s tests
+
+  package:
+    name: wheel install and CLI smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
-          python-version: '3.11'
-      - run: python -m unittest discover -s tests
+          python-version: '3.12'
+      - name: Build wheel and sdist
+        run: |
+          python -m pip install --upgrade build
+          # Run from outside the checkout: the repository's build.py would
+          # otherwise shadow the PyPA build package.
+          cd "$RUNNER_TEMP" && python -m build --outdir "$GITHUB_WORKSPACE/dist" "$GITHUB_WORKSPACE"
+      - name: Wheel ships the symbol sheet and licences
+        run: |
+          python - <<'EOF'
+          import glob, zipfile
+          names = zipfile.ZipFile(glob.glob('dist/*.whl')[0]).namelist()
+          for need in ('aipe_sketch/_data/Inkscape_Symbols_All.svg', 'aipe_sketch/cli.py'):
+              assert need in names, need
+          assert any(n.endswith('licenses/LICENSE') for n in names)
+          assert any(n.endswith('licenses/THIRD_PARTY_NOTICES.md') for n in names)
+          EOF
+      - name: Install into a clean venv and run outside the repository
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install dist/*.whl
+          cd "$RUNNER_TEMP" && mkdir smoke && cd smoke
+          CLI="$RUNNER_TEMP/venv/bin/aipe-sketcher"
+          "$CLI" --version
+          "$CLI" examples --list
+          "$CLI" kinds
+          "$CLI" examples buck dab llc_resonant --ir-only -o ir
+          for c in buck dab llc_resonant; do
+            "$CLI" validate "ir/$c.json"
+            "$CLI" render "ir/$c.json" -o svg
+            test -s "svg/$c.svg" && test -s "svg/$c.report.json"
+          done
+          python -c "import json; d=json.load(open('ir/buck.json')); d['nets']['SW'].remove('L1.a'); json.dump(d, open('broken.json','w'))"
+          if "$CLI" validate broken.json; then echo 'invalid circuit was accepted'; exit 1; fi
+          echo '{"version": 1,' > malformed.json
+          set +e; "$CLI" render malformed.json; status=$?; set -e
+          test "$status" -eq 2
+      - name: Plugin launcher runs from a foreign directory
+        run: |
+          cd "$RUNNER_TEMP/smoke"
+          python "$GITHUB_WORKSPACE/skills/schematic/scripts/aipe_sketcher.py" render ir/dab.json -o launcher --json > launcher.json
+          python -c "import json; r=json.load(open('launcher.json')); assert r['status'] == 'ok' and r['drawing_connectivity']['status'] == 'passed', r"
+
+  manifests:
+    name: plugin and capability manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pyyaml jsonschema
+      - run: python tools/check_manifest.py
+      - run: python -m unittest tests.test_plugin_packaging
+
+  claude-validator:
+    # Advisory: uses the official validator from the npm distribution of
+    # Claude Code. It needs no login, but the package source may change.
+    name: claude plugin validate (advisory)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - run: npx --yes @anthropic-ai/claude-code plugin validate --strict .
+      - run: npx --yes @anthropic-ai/claude-code plugin validate --strict .claude-plugin/plugin.json

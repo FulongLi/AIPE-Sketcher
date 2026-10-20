@@ -1,0 +1,225 @@
+AIPE Sketcher Personal Non-Commercial License
+Version 0.1 — DRAFT
+SPDX identifier used by this project: LicenseRef-AIPE-Sketcher-Personal-NonCommercial-0.1
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ DRAFT FOR LEGAL REVIEW. This text sets out the copyright holder's intended   │
+│ licensing policy for AIPE Sketcher. It has not been reviewed by a qualified  │
+│ legal professional, it is not guaranteed to be enforceable as written in any │
+│ jurisdiction, and the copyright holder may replace it with a reviewed        │
+│ version. Items marked [DECISION NEEDED] must be settled by the copyright     │
+│ holder before a final release. This is a source-available license. It is     │
+│ NOT an open-source license and is not approved by the Open Source            │
+│ Initiative.                                                                  │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+AIPE Sketcher
+AIPE Labs / Spirit Connect
+Copyright (c) 2026 Fulong Li
+All rights reserved, except as expressly granted below.
+
+Commercial licensing and permissions: info@spiritconnect.co.uk
+[DECISION NEEDED: confirm this is the contact address for AIPE Sketcher.]
+
+[DECISION NEEDED — third-party contribution] Part of this repository (the
+Engineering State adapter in aipe_sketch/state.py, its tests, the original
+aipe.yaml manifest, docs/engineering-state.md and the original CI workflow)
+was contributed by a person other than the copyright holder named above.
+Before this License is relied on for that material, the copyright holder
+should obtain the contributor's written agreement (for example an assignment
+or a license permitting distribution under these terms), or replace that
+material. Until then, the copyright notice above covers only the material the
+copyright holder owns.
+
+
+1. Summary (not part of the terms)
+
+   The source code of AIPE Sketcher is publicly visible. An individual may use,
+   study and privately modify it for personal learning, experimentation and
+   non-commercial research. Commercial use of any kind requires prior written
+   permission from the copyright holder. Unmodified copies may be shared free of
+   charge under this License; publicly distributing modified versions requires
+   permission. The bundled electrical symbol sheet is third-party CC0 material and
+   is not restricted by this License.
+
+
+2. Definitions
+
+   "Licensor" means the copyright holder named above.
+
+   "Software" means AIPE Sketcher as made available by the Licensor: its source
+   code, plugin manifests, skills, command-line tools, documentation, tests,
+   examples and the material the Licensor created, in any form, including any part
+   of them. The Software does not include Third-Party Components.
+
+   "Third-Party Components" means material owned by others and distributed with the
+   Software, including everything listed in THIRD_PARTY_NOTICES.md (in particular
+   assets/master/Inkscape_Symbols_All.svg and the symbol geometry derived from it).
+
+   "You" means the individual natural person exercising rights under this License.
+
+   "Personal Use" means use by You, as an individual, for Your own private,
+   non-commercial purposes — such as learning, self-study, experimentation,
+   personal projects and non-commercial research carried out by You — that is not
+   Commercial Use.
+
+   "Commercial Use" means any use that is intended for, directed toward, or results
+   in commercial advantage or monetary compensation, for You or for anyone else,
+   including use in or for a product or service that is sold, licensed, rented,
+   advertised, offered by subscription, or provided in exchange for anything of
+   value, and use in the course of paid employment or paid contract work.
+
+   [DECISION NEEDED: whether non-commercial use by or on behalf of an organization
+   (for example coursework set by a university, or research carried out by an
+   academic or public-sector institution rather than by You personally) is
+   permitted under this License or requires a separate permission.]
+
+   "Modified Version" means any work that contains the Software, or a substantial
+   part of it, with changes, additions or deletions, and any work derived from the
+   Software within the meaning of applicable copyright law.
+
+
+3. License grant
+
+   Subject to Your compliance with this License, the Licensor grants You a
+   worldwide, royalty-free, non-exclusive, non-transferable, non-sublicensable
+   license to install, run, use, copy, study and modify the Software, solely for
+   Personal Use.
+
+   Schematics and other output You generate with the Software from Your own input
+   are Yours to use; this License does not claim ownership of them. Output that
+   reproduces Third-Party Components remains subject to their licenses.
+   [DECISION NEEDED: confirm whether generated output may be used commercially.]
+
+
+4. Private modifications
+
+   You may modify the Software and use Your Modified Versions privately for Personal
+   Use. Your modifications do not give You any right to use the Software beyond
+   Personal Use.
+
+
+5. Sharing copies
+
+   (a) You may give copies of the unmodified Software to other individuals for their
+       own Personal Use, provided that You charge nothing and receive nothing of
+       value for it, You include this License and every notice required by
+       section 7 unchanged, and the recipients receive it under this License only.
+   (b) You may not publicly distribute, publish or make available a Modified
+       Version — including through a public repository, package index, plugin
+       marketplace or download site — without the Licensor's prior written
+       permission. You may share a Modified Version privately with another
+       individual only for that individual's Personal Use, on the terms of (a).
+   (c) You may not sublicense the Software or offer it under any other terms.
+
+
+6. Public repositories and forks
+
+   (a) The Licensor publishes the Software in a public repository on GitHub. GitHub's
+       Terms of Service give GitHub users certain permissions for public content
+       within GitHub's services, such as viewing it and forking it on GitHub. Those
+       permissions come from GitHub's terms, not from this License, and they do not
+       extend to any use of the Software outside what GitHub's terms provide.
+   (b) Any use of the Software, including the Software in a fork, is governed by this
+       License. A fork does not acquire any rights beyond those in this License.
+   (c) A public fork must keep this License and all notices required by section 7,
+       must not publish modifications to the Software except as section 5 allows,
+       and must not state or imply that it is the original Software or that it is
+       endorsed by the Licensor.
+
+
+7. Notices and attribution
+
+   (a) Every copy or substantial portion of the Software must keep this License, the
+       copyright notice above, and THIRD_PARTY_NOTICES.md.
+   (b) You must not remove, alter or obscure any copyright, license, attribution or
+       trademark notice in the Software.
+
+
+8. Uses that require prior written permission
+
+   Without prior written permission from the Licensor, this License does not permit,
+   and You must not engage in:
+
+   (a) any Commercial Use;
+   (b) incorporating the Software, or any part or Modified Version of it, into a
+       commercial product, commercial service or commercial distribution;
+   (c) offering the Software or its functionality to others as a paid service,
+       hosted service, software-as-a-service, or as part of a paid AI-agent,
+       assistant or automation offering;
+   (d) redistributing the Software, or any part of it, for a fee or as part of
+       commercial software;
+   (e) creating, distributing or operating a commercial derivative product based on
+       the Software;
+   (f) publicly distributing a Modified Version (section 5(b)).
+
+   The Licensor retains all commercial licensing rights. To request permission or a
+   commercial license, contact the address given above.
+
+
+9. Third-Party Components
+
+   Third-Party Components are not licensed under this License. Each is governed by
+   its own license, as stated in THIRD_PARTY_NOTICES.md. The master symbol sheet is
+   dedicated to the public domain under CC0 1.0 Universal by its authors; nothing in
+   this License restricts, revokes or conditions any right anyone has in it, and the
+   restrictions in this License do not apply to it.
+
+
+10. Trademarks
+
+   This License grants no rights in the names, logos or trademarks of the Licensor,
+   including "AIPE", "AIPE Sketcher", "AIPE Labs" and "Spirit Connect", except as
+   needed to give the notices required by section 7.
+
+
+11. Contributions
+
+   [DECISION NEEDED] Whether and on what terms the Licensor accepts contributions
+   (for example under a contributor license agreement or assignment). Until such
+   terms are published, the Licensor may decline any contribution, and submitting
+   one does not by itself transfer or license any rights to the Licensor beyond those
+   needed to review it.
+
+
+12. Termination
+
+   (a) Your license under this License ends automatically if You breach it.
+   (b) If the Licensor notifies You of a breach and it is Your first breach, Your
+       license is reinstated if You cure the breach within 30 days of the notice.
+       [DECISION NEEDED: confirm this cure period.]
+   (c) On termination You must stop using the Software and delete Your copies,
+       except as required by law. Sections 2, 7(b), 9, 10, 12, 13, 14 and 15
+       survive termination.
+
+
+13. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY
+   KIND, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT, TO
+   THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW. The Software checks that a drawing
+   matches the circuit description it was given; it does not verify that any
+   circuit is correct, safe, rated appropriately or fit for any purpose.
+
+
+14. Limitation of liability
+
+   TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL THE LICENSOR
+   OR ANY CONTRIBUTOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+   EXEMPLARY OR CONSEQUENTIAL DAMAGES, OR ANY LOSS OF DATA, PROFITS OR USE, HOWEVER
+   CAUSED AND ON ANY THEORY OF LIABILITY, ARISING IN ANY WAY OUT OF THE USE OF OR
+   INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+   DAMAGE. Nothing in this License excludes or limits any liability that cannot be
+   excluded or limited by law, including statutory rights You have as a consumer.
+
+
+15. General
+
+   (a) Governing law: [DECISION NEEDED: e.g. the laws of England and Wales, and the
+       courts having jurisdiction there].
+   (b) If any provision of this License is held unenforceable, it will be enforced to
+       the maximum extent permissible and the remaining provisions remain in effect.
+   (c) Any right not expressly granted in this License is reserved by the Licensor.
+   (d) Separate written agreements with the Licensor (commercial licenses or
+       permissions) take precedence over this License for the uses they cover.

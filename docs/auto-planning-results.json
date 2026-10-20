@@ -1,12 +1,12 @@
 [
   {
     "circuit": "buck",
-    "automatic": 97,
+    "automatic": 98,
     "valid": true,
     "acceptable": true,
     "selected": 6,
     "candidates": 12,
-    "manual": 97
+    "manual": 98
   },
   {
     "circuit": "boost",
@@ -37,7 +37,7 @@
   },
   {
     "circuit": "three_phase_inverter",
-    "automatic": 97,
+    "automatic": 98,
     "valid": true,
     "acceptable": true,
     "selected": 3,
@@ -67,9 +67,9 @@
     "automatic": 99,
     "valid": true,
     "acceptable": true,
-    "selected": 0,
+    "selected": 1,
     "candidates": 12,
-    "manual": 99
+    "manual": 98
   },
   {
     "circuit": "twin_shunt_branches",
@@ -82,7 +82,7 @@
   },
   {
     "circuit": "three_repeated_legs",
-    "automatic": 97,
+    "automatic": 98,
     "valid": true,
     "acceptable": true,
     "selected": 3,
@@ -105,7 +105,7 @@
     "acceptable": true,
     "selected": 0,
     "candidates": 12,
-    "manual": 94
+    "manual": 96
   },
   {
     "circuit": "source_l_r",

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "aipe-sketcher",
+  "version": "0.2.0",
+  "description": "AI-powered electrical schematic generation for power electronics and circuit engineering: turns a circuit description into explicit Circuit IR, renders an SVG schematic with the bundled Python engine and checks that every drawn connection matches the circuit. No API key, cloud service or Python packages required.",
+  "author": {
+    "name": "AIPE Labs / Spirit Connect",
+    "url": "https://github.com/FulongLi"
+  },
+  "homepage": "https://github.com/FulongLi/AIPE-Sketcher",
+  "repository": "https://github.com/FulongLi/AIPE-Sketcher",
+  "license": "LicenseRef-AIPE-Sketcher-Personal-NonCommercial-0.1 AND CC0-1.0",
+  "keywords": ["schematic", "circuit", "power-electronics", "netlist", "svg", "dc-dc", "inverter", "aipe"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "AIPE Sketcher",
+        "shortDescription": "Connectivity-checked SVG circuit schematics",
+        "longDescription": "AIPE Sketcher generates electrical schematics for power electronics and general circuits. Describe a circuit, name a reference converter (buck, boost, half or full bridge, dual active bridge, LLC resonant, three-phase inverter) or supply Circuit IR JSON; the skill writes explicit Circuit IR, validates components, ports and nets, renders an SVG with a standard symbol library and reads the drawing back to prove it matches the circuit. It reports assumptions and limitations: connectivity checks do not establish ratings, safety or performance. Runs locally with Python 3.9+; no API key and no packages to install. Free for personal, non-commercial use.",
+        "developerName": "AIPE Labs / Spirit Connect",
+        "category": "Engineering",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://github.com/FulongLi/AIPE-Sketcher",
+        "defaultPrompt": [
+          "Generate a Dual Active Bridge converter schematic using AIPE Sketcher, validate all electrical connections, and export the result as SVG.",
+          "Draw a buck converter schematic with AIPE Sketcher",
+          "Validate this Circuit IR JSON with AIPE Sketcher"
+        ]
+      }
+    }
+  }
+}

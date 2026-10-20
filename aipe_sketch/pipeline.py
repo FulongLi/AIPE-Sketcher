@@ -112,10 +112,10 @@ class Schematic:
     def from_netlist(cls, circuit, *, source=None, plan=None, text=None,
                      size=None, title=None, candidates=12):
         """Generate a schematic view; manual geometry is an optional override."""
-        from .paths import MASTER
+        from .paths import master_path
         if not 1 <= candidates <= 12:
             raise ValueError('candidate count must be between 1 and 12')
-        schematic = cls(source or MASTER, circuit, plan, size=size, title=title, text=text)
+        schematic = cls(source or master_path(), circuit, plan, size=size, title=title, text=text)
         if plan is None and candidates > 1:
             from .candidates import select
             return select(schematic, candidates, text=text)
